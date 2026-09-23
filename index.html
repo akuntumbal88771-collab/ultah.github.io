@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday, Sayangku 💖</title>
+  <meta name="description" content="Selamat Ulang Tahun dari orang yang paling bucin sama kamu 💕"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- MUSIC CONTROL -->
+  <button id="music-btn" class="music-btn" onclick="toggleMusic()" aria-label="Play/Pause Musik">
+    <span class="music-disc" id="music-disc">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </span>
+    <span id="music-label">Musik</span>
+  </button>
+
+  <!-- BG CANVAS -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- GRID OVERLAY -->
+  <div class="bg-grid"></div>
+
+  <!-- ══════════════════════════════════════
+       INTRO SCREEN
+       ══════════════════════════════════════ -->
+  <div id="intro-screen" class="screen active">
+    <div class="intro-wrap">
+      <div class="intro-badge">💌 Ada yang spesial buat kamu</div>
+      <h1 class="intro-headline">Klik untuk<br/><em>membuka kejutan</em></h1>
+
+      <div class="envelope-scene" id="envelope-wrapper" onclick="openEnvelope()">
+        <div class="env-shadow"></div>
+        <div class="env-body" id="env-body">
+          <div class="env-inner-bg"></div>
+          <div class="env-letter" id="env-letter">
+            <span>💖</span>
+            <small>For you</small>
+          </div>
+        </div>
+        <div class="env-flap" id="env-flap"></div>
+        <div class="env-side env-side-l"></div>
+        <div class="env-side env-side-r"></div>
+        <div class="env-bottom"></div>
+      </div>
+
+      <p class="intro-hint">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M12 19l-4-4M12 19l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Ketuk amplop
+      </p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SCREEN 1 — CAKE
+       ══════════════════════════════════════ -->
+  <div id="screen-1" class="screen">
+    <div class="s1-layout">
+
+      <!-- Left: Text -->
+      <div class="s1-text">
+        <span class="chip">🎂 Hari Spesialmu</span>
+        <h2 class="s1-title" id="typing-title"></h2>
+        <p class="s1-sub">Untuk orang yang paling aku sayangi di seluruh semesta ini 🌸</p>
+
+        <div class="lilin-control">
+          <button class="btn-primary" id="btn-tiup" onclick="tiupLilin()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 12c0-1.5 1-2.5 2.5-2.5S8 10.5 8 12c0 3-5 6-5 6s-5-3-5-6" stroke="currentColor" stroke-width="2"/><path d="M21 3l-9 9M12 12l-3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Tiup Lilin!
+          </button>
+          <div id="wish-bubble" class="wish-bubble hidden">
+            <div class="wish-icon">🎉</div>
+            <p>Semoga semua harapanmu terkabul, sayangku!</p>
+          </div>
+        </div>
+
+        <button class="btn-ghost" onclick="goToScreen(2)">
+          Lihat Pesan Cinta
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <!-- Right: SVG Cake -->
+      <div class="s1-cake-wrap">
+        <div class="cake-glow"></div>
+        <svg class="cake-svg" id="cake-svg" viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg">
+          <!-- Plate / Shadow -->
+          <ellipse cx="150" cy="358" rx="120" ry="12" fill="url(#shadowGrad)"/>
+          <!-- Plate -->
+          <ellipse cx="150" cy="345" rx="120" ry="10" fill="url(#plateGrad)"/>
+          <ellipse cx="150" cy="343" rx="116" ry="7" fill="url(#plateTop)"/>
+
+          <!-- Tier 1 Base -->
+          <rect x="40" y="270" width="220" height="75" rx="12" fill="url(#tier1Grad)"/>
+          <ellipse cx="150" cy="270" rx="110" ry="10" fill="url(#tier1Top)"/>
+          <!-- Tier 1 cream drips -->
+          <path d="M60 270 Q65 288 70 270" fill="white" opacity="0.7"/>
+          <path d="M95 270 Q100 292 105 270" fill="white" opacity="0.6"/>
+          <path d="M200 270 Q205 286 210 270" fill="white" opacity="0.7"/>
+          <path d="M235 270 Q240 290 245 270" fill="white" opacity="0.5"/>
+          <!-- Tier 1 text -->
+          <text x="150" y="310" text-anchor="middle" font-family="Playfair Display, serif" font-size="13" fill="white" opacity="0.9">🎀 Sayangku 🎀</text>
+          <!-- Tier 1 dots -->
+          <circle cx="75" cy="295" r="4" fill="#FFB6C1" opacity="0.8"/>
+          <circle cx="95" cy="305" r="3" fill="#FF69B4" opacity="0.7"/>
+          <circle cx="205" cy="295" r="4" fill="#FFB6C1" opacity="0.8"/>
+          <circle cx="225" cy="285" r="3" fill="#FF69B4" opacity="0.7"/>
+
+          <!-- Tier 2 -->
+          <rect x="70" y="185" width="160" height="90" rx="10" fill="url(#tier2Grad)"/>
+          <ellipse cx="150" cy="185" rx="80" ry="9" fill="url(#tier2Top)"/>
+          <!-- Tier 2 cream drips -->
+          <path d="M85 185 Q90 200 95 185" fill="white" opacity="0.7"/>
+          <path d="M115 185 Q120 205 125 185" fill="white" opacity="0.6"/>
+          <path d="M175 185 Q180 198 185 185" fill="white" opacity="0.7"/>
+          <path d="M200 185 Q205 203 210 185" fill="white" opacity="0.5"/>
+          <!-- Tier 2 flowers -->
+          <text x="150" y="222" text-anchor="middle" font-size="11" fill="white" opacity="0.85" font-family="sans-serif">💕 Happy Birthday 💕</text>
+          <circle cx="100" cy="247" r="5" fill="#FF1493" opacity="0.5"/>
+          <circle cx="120" cy="255" r="3" fill="#FFB6C1" opacity="0.6"/>
+          <circle cx="185" cy="245" r="5" fill="#FF1493" opacity="0.5"/>
+          <circle cx="165" cy="256" r="3" fill="#FFB6C1" opacity="0.6"/>
+
+          <!-- Tier 3 Top -->
+          <rect x="100" y="115" width="100" height="75" rx="8" fill="url(#tier3Grad)"/>
+          <ellipse cx="150" cy="115" rx="50" ry="7" fill="url(#tier3Top)"/>
+          <!-- Tier 3 drips -->
+          <path d="M112 115 Q117 128 122 115" fill="white" opacity="0.7"/>
+          <path d="M175 115 Q180 130 185 115" fill="white" opacity="0.6"/>
+          <!-- Tier 3 flowers -->
+          <text x="150" y="148" text-anchor="middle" font-size="14" font-family="sans-serif">🌸🌸🌸</text>
+
+          <!-- Candle holders -->
+          <g id="candles-group">
+            <!-- Candle 1 -->
+            <rect x="112" y="70" width="10" height="46" rx="5" fill="url(#candleGrad1)"/>
+            <ellipse cx="117" cy="70" rx="5" ry="2.5" fill="#FFE0EC"/>
+            <!-- Candle 2 -->
+            <rect x="134" y="64" width="10" height="52" rx="5" fill="url(#candleGrad2)"/>
+            <ellipse cx="139" cy="64" rx="5" ry="2.5" fill="#FFE0EC"/>
+            <!-- Candle 3 -->
+            <rect x="156" y="70" width="10" height="46" rx="5" fill="url(#candleGrad3)"/>
+            <ellipse cx="161" cy="70" rx="5" ry="2.5" fill="#FFE0EC"/>
+            <!-- Candle 4 -->
+            <rect x="178" y="75" width="10" height="41" rx="5" fill="url(#candleGrad4)"/>
+            <ellipse cx="183" cy="75" rx="5" ry="2.5" fill="#FFE0EC"/>
+          </g>
+
+          <!-- Flames -->
+          <g id="flames-group">
+            <g id="flame-1" class="flame-g">
+              <ellipse cx="117" cy="65" rx="5" ry="8" fill="url(#flameOuter)" opacity="0.6"/>
+              <ellipse cx="117" cy="67" rx="3" ry="5" fill="url(#flameMid)"/>
+              <ellipse cx="117" cy="69" rx="1.5" ry="2.5" fill="white"/>
+            </g>
+            <g id="flame-2" class="flame-g">
+              <ellipse cx="139" cy="59" rx="5" ry="8" fill="url(#flameOuter)" opacity="0.6"/>
+              <ellipse cx="139" cy="61" rx="3" ry="5" fill="url(#flameMid)"/>
+              <ellipse cx="139" cy="63" rx="1.5" ry="2.5" fill="white"/>
+            </g>
+            <g id="flame-3" class="flame-g">
+              <ellipse cx="161" cy="65" rx="5" ry="8" fill="url(#flameOuter)" opacity="0.6"/>
+              <ellipse cx="161" cy="67" rx="3" ry="5" fill="url(#flameMid)"/>
+              <ellipse cx="161" cy="69" rx="1.5" ry="2.5" fill="white"/>
+            </g>
+            <g id="flame-4" class="flame-g">
+              <ellipse cx="183" cy="70" rx="5" ry="8" fill="url(#flameOuter)" opacity="0.6"/>
+              <ellipse cx="183" cy="72" rx="3" ry="5" fill="url(#flameMid)"/>
+              <ellipse cx="183" cy="74" rx="1.5" ry="2.5" fill="white"/>
+            </g>
+          </g>
+
+          <!-- Stars / sparkles around cake -->
+          <text x="25" y="130" font-size="14" opacity="0.7" class="cake-star">✨</text>
+          <text x="265" y="150" font-size="12" opacity="0.6" class="cake-star">⭐</text>
+          <text x="20" y="220" font-size="10" opacity="0.5" class="cake-star">💫</text>
+          <text x="268" y="250" font-size="14" opacity="0.6" class="cake-star">✨</text>
+          <text x="50" y="310" font-size="10" opacity="0.4" class="cake-star">💕</text>
+          <text x="240" y="320" font-size="12" opacity="0.5" class="cake-star">🌸</text>
+
+          <!-- SVG DEFS -->
+          <defs>
+            <radialGradient id="shadowGrad" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#c2185b" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#c2185b" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="plateGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fce4ec"/>
+              <stop offset="100%" stop-color="#f8bbd0"/>
+            </linearGradient>
+            <linearGradient id="plateTop" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="white"/>
+              <stop offset="100%" stop-color="#fce4ec"/>
+            </linearGradient>
+            <!-- Tier 1 -->
+            <linearGradient id="tier1Grad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#e91e8c"/>
+              <stop offset="100%" stop-color="#880e4f"/>
+            </linearGradient>
+            <linearGradient id="tier1Top" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f48fb1"/>
+              <stop offset="100%" stop-color="#e91e8c"/>
+            </linearGradient>
+            <!-- Tier 2 -->
+            <linearGradient id="tier2Grad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f06292"/>
+              <stop offset="100%" stop-color="#c2185b"/>
+            </linearGradient>
+            <linearGradient id="tier2Top" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f8bbd0"/>
+              <stop offset="100%" stop-color="#f06292"/>
+            </linearGradient>
+            <!-- Tier 3 -->
+            <linearGradient id="tier3Grad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f48fb1"/>
+              <stop offset="100%" stop-color="#e91e8c"/>
+            </linearGradient>
+            <linearGradient id="tier3Top" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#fce4ec"/>
+              <stop offset="100%" stop-color="#f48fb1"/>
+            </linearGradient>
+            <!-- Candles -->
+            <linearGradient id="candleGrad1" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#fce4ec"/>
+              <stop offset="50%" stop-color="white"/>
+              <stop offset="100%" stop-color="#f8bbd0"/>
+            </linearGradient>
+            <linearGradient id="candleGrad2" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#fff3e0"/>
+              <stop offset="50%" stop-color="white"/>
+              <stop offset="100%" stop-color="#ffe0b2"/>
+            </linearGradient>
+            <linearGradient id="candleGrad3" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#e8eaf6"/>
+              <stop offset="50%" stop-color="white"/>
+              <stop offset="100%" stop-color="#c5cae9"/>
+            </linearGradient>
+            <linearGradient id="candleGrad4" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#f3e5f5"/>
+              <stop offset="50%" stop-color="white"/>
+              <stop offset="100%" stop-color="#e1bee7"/>
+            </linearGradient>
+            <!-- Flames -->
+            <radialGradient id="flameOuter" cx="50%" cy="80%">
+              <stop offset="0%" stop-color="#ff6d00"/>
+              <stop offset="100%" stop-color="#ffab40" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="flameMid" cx="50%" cy="80%">
+              <stop offset="0%" stop-color="#ffd740"/>
+              <stop offset="100%" stop-color="#ff6d00"/>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SCREEN 2 — MESSAGES
+       ══════════════════════════════════════ -->
+  <div id="screen-2" class="screen">
+    <div class="s-inner">
+      <span class="chip">💌 Pesan dari Hati</span>
+      <h2 class="section-heading">Kata-kata yang<br/><em>susah aku ucapkan</em></h2>
+
+      <div class="cards-grid">
+        <div class="msg-card" onclick="flipCard(this)" id="mc1">
+          <div class="mc-inner">
+            <div class="mc-front">
+              <div class="mc-icon">💖</div>
+              <span>Tap untuk buka</span>
+            </div>
+            <div class="mc-back">
+              <p>"Kamu adalah alasan kenapa aku senyum-senyum sendiri kayak orang gila. Dan aku <strong>gak nyesel sama sekali</strong> 🥰"</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="msg-card" onclick="flipCard(this)" id="mc2">
+          <div class="mc-inner">
+            <div class="mc-front">
+              <div class="mc-icon">🌙</div>
+              <span>Tap untuk buka</span>
+            </div>
+            <div class="mc-back">
+              <p>"Di hari ulang tahunmu ini, aku mau bilang kamu itu <strong>berharga banget</strong> buat aku. Jangan pernah lupain itu ya 🌙"</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="msg-card" onclick="flipCard(this)" id="mc3">
+          <div class="mc-inner">
+            <div class="mc-front">
+              <div class="mc-icon">🌸</div>
+              <span>Tap untuk buka</span>
+            </div>
+            <div class="mc-back">
+              <p>"Aku bucin? Iya. Aku malu? <strong>Enggak sama sekali.</strong> Karena kamu emang worth it banget buat di-bucinin 🌸"</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="msg-card" onclick="flipCard(this)" id="mc4">
+          <div class="mc-inner">
+            <div class="mc-front">
+              <div class="mc-icon">⭐</div>
+              <span>Tap untuk buka</span>
+            </div>
+            <div class="mc-back">
+              <p>"Semoga di umur baru ini kamu makin bahagia, makin sehat, makin cantik — walaupun kayaknya impossible karena kamu udah sempurna ⭐"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-ghost" onclick="goToScreen(3)">
+        Lanjut ke Kejutan
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SCREEN 3 — REASONS
+       ══════════════════════════════════════ -->
+  <div id="screen-3" class="screen">
+    <div class="s-inner">
+      <span class="chip">💝 Alasan Aku Sayang Kamu</span>
+      <h2 class="section-heading">Klik tiap jantung<br/><em>untuk tahu rahasianya</em></h2>
+
+      <div class="reasons-grid" id="reasons-grid">
+        <!-- Built by JS -->
+      </div>
+
+      <button class="btn-ghost" onclick="goToScreen(4)">
+        Satu Kejutan Lagi
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SCREEN 4 — FINAL
+       ══════════════════════════════════════ -->
+  <div id="screen-4" class="screen">
+    <div class="s-inner final-inner">
+      <div class="final-heart-wrap" id="big-heart" onclick="burstHeart()">
+        <div class="final-heart-pulse"></div>
+        <div class="final-heart-icon">💗</div>
+        <span class="final-heart-hint">klik aku!</span>
+      </div>
+
+      <h2 class="final-title">Aku Cinta Kamu</h2>
+      <p class="final-sub">Selamanya & lebih dari yang bisa aku ungkapkan 🌹</p>
+
+      <div class="polaroid-row">
+        <div class="polaroid" style="--r:-6deg">
+          <div class="pola-img">🥰</div>
+          <p>Lagi lucu</p>
+        </div>
+        <div class="polaroid" style="--r:3deg">
+          <div class="pola-img">💕</div>
+          <p>Lagi cantik</p>
+        </div>
+        <div class="polaroid" style="--r:-4deg">
+          <div class="pola-img">✨</div>
+          <p>Selalu</p>
+        </div>
+      </div>
+
+      <div class="love-note">
+        <p>Dengan sepenuh cinta,</p>
+        <p class="love-sig">— Orang yang paling bucin sama kamu 💖</p>
+      </div>
+
+      <button class="btn-ghost" onclick="restartAll()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M1 4v6h6M23 20v-6h-6M20.49 9a9 9 0 0 0-15.39-4.29L1 10M23 14l-4.1 4.71A9 9 0 0 1 3.51 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Ulangi dari Awal
+      </button>
+    </div>
+  </div>
+
+  <!-- CONFETTI & HEARTS -->
+  <div id="confetti-container"></div>
+  <div id="floating-hearts"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
